@@ -8,14 +8,53 @@ import 'package:get/get.dart';
 
 import '../../../controllers/landing_page_controller.dart';
 
-class LandingPage extends StatelessWidget {
-  LandingPage({Key? key}) : super(key: key);
+class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
+
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin {
   final controller = Get.put(LandingPageController());
+  late AnimationController _controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeIn,
+    );
+    _controller.forward();
+    super.initState();
+  }
+
+  _startAnimation() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeIn,
+    );
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final product = controller.allProductList;
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

@@ -1,5 +1,6 @@
 import 'package:delowarhossain/util/custom_theme.dart';
-import 'package:delowarhossain/views/screens/landing_page/landing_home_page.dart';
+import 'package:delowarhossain/views/screens/dashboard.dart';
+import 'package:delowarhossain/views/screens/landing_page/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Delowar Hossain',
       theme: CustomTheme.lightTheme,
-      home: LandingPage(),
+      home: const Dashboard(),
     );
   }
 }
