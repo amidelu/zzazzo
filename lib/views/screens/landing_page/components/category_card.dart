@@ -2,8 +2,9 @@ import 'package:delowarhossain/util/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({Key? key, this.title}) : super(key: key);
+  const CategoryCard({Key? key, this.title, this.width}) : super(key: key);
   final title;
+  final width;
 
 
   @override
@@ -12,7 +13,7 @@ class CategoryCard extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         height: 50,
-        width: 300,
+        width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: blackColor,

@@ -8,12 +8,11 @@ class LandingPageController extends GetxController {
   final isLoading = false.obs;
   
   final allProductList = <ProductModel>[].obs;
-  final categoriesList = [].obs;
+
 
   @override
   void onInit() {
     getProducts();
-    getAllCategories();
     super.onInit();
   }
 
@@ -22,19 +21,6 @@ class LandingPageController extends GetxController {
       isLoading.value = true;
       await RemoteServices.getAllProducts().then((value) {
         allProductList.value = value;
-      });
-    } catch (error) {
-      throw HttpException(error.toString());
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  void getAllCategories() async {
-    try {
-      isLoading.value = true;
-      await RemoteServices.getAllCategories().then((value) {
-        categoriesList.value = value;
       });
     } catch (error) {
       throw HttpException(error.toString());

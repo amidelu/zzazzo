@@ -50,7 +50,7 @@ class CustomTheme {
       fontWeight: FontWeight.bold,
       fontSize: 30,
       letterSpacing: 0.27,
-      color: whiteColor);
+      );
 
   static const TextStyle title = TextStyle(
     fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ const greyColor = Colors.grey;
 const lightGreyColor = Color(0xFFC2C2C2);
 
 const Color darkText = Color(0xFF17262A);
-const containerBackground = Color(0xFF364A54);
+const lightText = Color(0xFF364A54);
 const Color dismissibleBackground = Color(0xFF364A54);
 const Color spacer = Color(0xFFF2F2F2);
 

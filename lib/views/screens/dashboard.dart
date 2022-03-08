@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin{
   late CurvedAnimation curve;
 
   final screenList = [
-    const LandingPage(),
+    LandingPage(),
     const CartScreen(),
   ];
 

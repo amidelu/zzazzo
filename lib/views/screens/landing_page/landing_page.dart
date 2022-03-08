@@ -1,56 +1,19 @@
 import 'dart:math';
 
+import 'package:delowarhossain/controllers/category_controller.dart';
 import 'package:delowarhossain/util/custom_theme.dart';
 import 'package:delowarhossain/views/global_widgets/all_product_card.dart';
+import 'package:delowarhossain/views/screens/category_screen/category_main_screen.dart';
 import 'package:delowarhossain/views/screens/landing_page/components/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/landing_page_controller.dart';
 
-class LandingPage extends StatefulWidget {
-  const LandingPage({Key? key}) : super(key: key);
-
-  @override
-  State<LandingPage> createState() => _LandingPageState();
-}
-
-class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin {
+class LandingPage extends StatelessWidget {
+  LandingPage({Key? key}) : super(key: key);
   final controller = Get.put(LandingPageController());
-  late AnimationController _controller;
-  late Animation<double> animation;
-
-  @override
-  void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
-    _controller.forward();
-    super.initState();
-  }
-
-  _startAnimation() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  final catController = Get.put(CategoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -144,15 +107,26 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                 const SizedBox(height: 20),
                 Obx(
                   () => controller.isLoading.value
-                      ? const Center(child: CircularProgressIndicator())
+                      ? SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: const Center(child: CircularProgressIndicator()))
                       : SizedBox(
                           height: 150,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
-                            itemCount: controller.categoriesList.length,
-                            itemBuilder: (context, index) => CategoryCard(
-                              title: controller.categoriesList[index],
+                            itemCount: catController.categoriesList.length,
+                            itemBuilder: (context, index) => InkWell(
+                              onTap: () {
+                                catController.categoryName.value = catController.categoriesList[index];
+                                print('Name: ${catController.categoryName.value}');
+                                catController.getCategoryWiseProductList();
+                                Get.to(() => const CategoryMainScreen());
+                              },
+                              child: CategoryCard(
+                                width: 300.0,
+                                title: catController.categoriesList[index],
+                              ),
                             ),
                           ),
                         ),
