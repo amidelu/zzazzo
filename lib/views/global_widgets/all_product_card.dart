@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delowarhossain/util/custom_theme.dart';
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key, this.productImage, this.title, this.price})
+class AllProductCard extends StatelessWidget {
+  const AllProductCard({Key? key, this.productImage, this.title, this.price})
       : super(key: key);
 
   final productImage;
@@ -20,7 +20,7 @@ class ProductCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 4,
         child: SizedBox(
-          width: width * .6,
+          width: width * .65,
           child: Column(
             children: [
               Container(
@@ -65,7 +65,7 @@ class ProductCard extends StatelessWidget {
                           color: whiteColor.withOpacity(0.95),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,7 +84,10 @@ class ProductCard extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         const Icon(Icons.shopping_cart, color: primaryColor),
-                                        Text('Add to cart', style: CustomTheme.subtitle.copyWith(color: primaryColor),),
+                                        Text(
+                                          'Add to cart',
+                                          textAlign: TextAlign.center,
+                                          style: CustomTheme.subtitle.copyWith(color: primaryColor),),
                                       ],
                                     ),
                                   ),

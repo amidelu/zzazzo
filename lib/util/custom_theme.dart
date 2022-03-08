@@ -48,7 +48,7 @@ class CustomTheme {
 
   static const TextStyle headline1 = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 35,
+      fontSize: 30,
       letterSpacing: 0.27,
       color: whiteColor);
 

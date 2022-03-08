@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:delowarhossain/util/custom_theme.dart';
-import 'package:delowarhossain/views/global_widgets/product_card.dart';
+import 'package:delowarhossain/views/global_widgets/all_product_card.dart';
+import 'package:delowarhossain/views/screens/landing_page/components/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -66,11 +67,12 @@ class LandingPage extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: lightGreyColor,
+                      fillColor: Colors.grey.shade200,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20)
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none
                       ),
-                      contentPadding: const EdgeInsets.all(15.0),
+                      contentPadding: const EdgeInsets.all(22.0),
                       prefixIcon: const Icon(Icons.search),
                       hintText: 'Search product you wish...',
                     ),
@@ -90,7 +92,7 @@ class LandingPage extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             itemCount: controller.allProductList.length,
-                            itemBuilder: (context, index) => ProductCard(
+                            itemBuilder: (context, index) => AllProductCard(
                               productImage: product[index].image,
                               title: product[index].title,
                               price: product[index].price,
@@ -98,6 +100,25 @@ class LandingPage extends StatelessWidget {
                           ),
                         ),
                 ),
+                const SizedBox(height: 20),
+                const Text('Popular Categories', style: CustomTheme.headline),
+                const SizedBox(height: 20),
+                Obx(
+                  () => controller.isLoading.value
+                      ? const Center(child: CircularProgressIndicator())
+                      : SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: controller.categoriesList.length,
+                            itemBuilder: (context, index) => CategoryCard(
+                              title: controller.categoriesList[index],
+                            ),
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),

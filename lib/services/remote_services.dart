@@ -26,4 +26,19 @@ class RemoteServices {
       throw HttpException('Error from all product');
     }
 }
+
+  // Category api
+  static Future<List> getAllCategories() async {
+    final url = baseUrl! + 'products/categories';
+
+    final response = await client.get(Uri.parse(url));
+
+    if(response.statusCode == 200) {
+      final responseBody = json.decode(response.body);
+
+      return responseBody;
+    } else {
+      throw HttpException('Error from all product');
+    }
+  }
 }
