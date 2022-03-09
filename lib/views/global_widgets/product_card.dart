@@ -45,6 +45,7 @@ class ProductCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Stack(
+              alignment: Alignment.center,
               children: [
                 Container(
                   height: 120,
@@ -63,24 +64,19 @@ class ProductCard extends StatelessWidget {
                         border: Border.all(color: whiteColor)),
                   ),
                 ),
-                Positioned(
-                  top: 20,
-                  left: 40,
-                  right: 0,
-                  child: SimpleShadow(
-                    child: Image.network(
-                      image,
-                      height: 80,
-                      width: 80,
-                    ),
-                    opacity: 0.6,
-                    // Default: 0.5
-                    color: Colors.black,
-                    // Default: Black
-                    offset: const Offset(5, 5),
-                    // Default: Offset(2, 2)
-                    sigma: 7,
+                SimpleShadow(
+                  child: Image.network(
+                    image,
+                    height: 80,
+                    width: 80,
                   ),
+                  opacity: 0.6,
+                  // Default: 0.5
+                  color: Colors.black,
+                  // Default: Black
+                  offset: const Offset(5, 5),
+                  // Default: Offset(2, 2)
+                  sigma: 7,
                 ),
               ],
             ),

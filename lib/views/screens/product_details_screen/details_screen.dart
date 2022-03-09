@@ -42,10 +42,15 @@ class DetailsScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Image.asset(
-                                  'assets/images/back.png',
-                                  height: 20,
-                                  width: 20,
+                                InkWell(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: Image.asset(
+                                    'assets/images/back.png',
+                                    height: 20,
+                                    width: 20,
+                                  ),
                                 ),
                                 Center(
                                   child: RichText(
@@ -80,6 +85,7 @@ class DetailsScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             Stack(
+                              alignment: Alignment.center,
                               clipBehavior: Clip.hardEdge,
                               children: [
                                 Container(
@@ -102,24 +108,19 @@ class DetailsScreen extends StatelessWidget {
                                             Border.all(color: lightGreyColor)),
                                   ),
                                 ),
-                                Positioned(
-                                  top: 60,
-                                  left: 100,
-                                  right: 0,
-                                  child: SimpleShadow(
-                                    child: Image.network(
-                                      controller.product.value.image.toString(),
-                                      height: 200,
-                                      width: 200,
-                                    ),
-                                    opacity: 0.6,
-                                    // Default: 0.5
-                                    color: Colors.black,
-                                    // Default: Black
-                                    offset: const Offset(5, 5),
-                                    // Default: Offset(2, 2)
-                                    sigma: 7,
+                                SimpleShadow(
+                                  child: Image.network(
+                                    controller.product.value.image.toString(),
+                                    height: 200,
+                                    width: 200,
                                   ),
+                                  opacity: 0.6,
+                                  // Default: 0.5
+                                  color: Colors.black,
+                                  // Default: Black
+                                  offset: const Offset(5, 5),
+                                  // Default: Offset(2, 2)
+                                  sigma: 7,
                                 ),
                               ],
                             ),
@@ -187,8 +188,7 @@ class DetailsScreen extends StatelessWidget {
                                       itemCount: sizeList.length,
                                       itemBuilder: (context, index) =>
                                           Container(
-                                            padding:
-                                                const EdgeInsets.all(10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             height: 30,
                                             width: 60,
                                             decoration: BoxDecoration(
@@ -196,8 +196,7 @@ class DetailsScreen extends StatelessWidget {
                                                     ? sizeColor
                                                     : Colors.transparent,
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        15)),
+                                                    BorderRadius.circular(15)),
                                             child: Center(
                                               child: Text(
                                                 sizeList[index],
@@ -243,49 +242,51 @@ class DetailsScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 30.0),
-                        height: 100,
-                        decoration: const BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '\$${controller.product.value.price.toString()}',
-                              style: CustomTheme.headline,
+                        color: lightGreyColor.withOpacity(.3),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 30.0),
+                          height: 100,
+                          decoration: const BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
                             ),
-                            ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            lightGreyColor),
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(
-                                                    25)))),
-                                onPressed: () {},
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.shopping_cart,
-                                      color: blackColor,
-                                    ),
-                                    SizedBox(width: 4),
-                                    Text(
-                                      'Add to card',
-                                      style: TextStyle(color: blackColor),
-                                    )
-                                  ],
-                                ))
-                          ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '\$${controller.product.value.price.toString()}',
+                                style: CustomTheme.headline,
+                              ),
+                              ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              lightGreyColor),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25)))),
+                                  onPressed: () {},
+                                  child: Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.shopping_cart,
+                                        color: blackColor,
+                                      ),
+                                      SizedBox(width: 4),
+                                      Text(
+                                        'Add to card',
+                                        style: TextStyle(color: blackColor),
+                                      )
+                                    ],
+                                  ))
+                            ],
+                          ),
                         ),
                       ),
                     ],
