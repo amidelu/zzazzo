@@ -134,12 +134,21 @@ class _CategoryMainScreenState extends State<CategoryMainScreen> {
                                           (orientation == Orientation.portrait)
                                               ? 2
                                               : 4,
-                                      mainAxisExtent: 300),
-                              itemCount: controller.categoryWiseProductList.length,
-                              itemBuilder: (context, index) =>
-                                  ProductCard(
-                                    image: controller.categoryWiseProductList[index].image,
-                                  )),
+                                      mainAxisExtent: 370),
+                              itemCount:
+                                  controller.categoryWiseProductList.length,
+                              itemBuilder: (context, index) {
+                                final productData =
+                                    controller.categoryWiseProductList[index];
+
+                                return ProductCard(
+                                  image: productData.image,
+                                  title: productData.title,
+                                  price: productData.price,
+                                  rating: productData.rating?.rate,
+                                  count: productData.rating?.rate,
+                                );
+                              }),
                         ),
                 )
               ],
