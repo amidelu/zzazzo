@@ -28,6 +28,21 @@ class RemoteServices {
     }
 }
 
+  // Getting single products
+  static Future<ProductModel> singleProduct(int productId) async {
+    final url = baseUrl! + 'products/$productId';
+
+    final response = await client.get(Uri.parse(url));
+
+    if(response.statusCode == 200) {
+      final responseBody = json.decode(response.body);
+
+      return ProductModel.fromJson(responseBody);
+    } else {
+      throw HttpException('Error from single product');
+    }
+  }
+
   // Category api
   static Future<List> getAllCategories() async {
     final url = baseUrl! + 'products/categories';
@@ -39,7 +54,7 @@ class RemoteServices {
 
       return responseBody;
     } else {
-      throw HttpException('Error from all product');
+      throw HttpException('error');
     }
   }
 

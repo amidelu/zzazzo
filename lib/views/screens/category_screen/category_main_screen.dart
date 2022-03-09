@@ -1,9 +1,10 @@
 import 'package:delowarhossain/controllers/category_controller.dart';
 import 'package:delowarhossain/views/global_widgets/product_card.dart';
+import 'package:delowarhossain/views/screens/product_details_screen/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/landing_page_controller.dart';
+import '../../../controllers/product_controller.dart';
 import '../../../util/custom_theme.dart';
 import '../landing_page/components/category_card.dart';
 
@@ -16,6 +17,7 @@ class CategoryMainScreen extends StatefulWidget {
 
 class _CategoryMainScreenState extends State<CategoryMainScreen> {
   final controller = Get.find<CategoryController>();
+  final productController = Get.find<ProductController>();
 
   double selectedElevation = 0.0;
 
@@ -52,7 +54,7 @@ class _CategoryMainScreenState extends State<CategoryMainScreen> {
                         ]),
                       ),
                     ),
-                    Icon(Icons.search, color: blackColor),
+                    const Icon(Icons.search, color: blackColor),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -140,13 +142,19 @@ class _CategoryMainScreenState extends State<CategoryMainScreen> {
                               itemBuilder: (context, index) {
                                 final productData =
                                     controller.categoryWiseProductList[index];
-
-                                return ProductCard(
-                                  image: productData.image,
-                                  title: productData.title,
-                                  price: productData.price,
-                                  rating: productData.rating?.rate,
-                                  count: productData.rating?.rate,
+                                return InkWell(
+                                  onTap: () {
+                                    productController.productId.value = productData.id!;
+                                    productController.getSingleProduct();
+                                    Get.to(() => DetailsScreen());
+                                  },
+                                  child: ProductCard(
+                                    image: productData.image,
+                                    title: productData.title,
+                                    price: productData.price,
+                                    rating: productData.rating?.rate,
+                                    count: productData.rating?.rate,
+                                  ),
                                 );
                               }),
                         ),

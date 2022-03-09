@@ -8,11 +8,12 @@ import 'package:delowarhossain/views/screens/landing_page/components/category_ca
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/landing_page_controller.dart';
+import '../../../controllers/product_controller.dart';
+import '../product_details_screen/details_screen.dart';
 
 class LandingPage extends StatelessWidget {
   LandingPage({Key? key}) : super(key: key);
-  final controller = Get.put(LandingPageController());
+  final controller = Get.put(ProductController());
   final catController = Get.put(CategoryController());
 
   @override
@@ -84,7 +85,7 @@ class LandingPage extends StatelessWidget {
                 const Text('Daily Deals', style: CustomTheme.headline),
                 const SizedBox(height: 20),
                 Obx(
-                  () => controller.isLoading.value
+                  () => controller.isProductLoading.value
                       ? const Center(
                           child: CircularProgressIndicator(),
                         )
@@ -94,10 +95,17 @@ class LandingPage extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             itemCount: controller.allProductList.length,
-                            itemBuilder: (context, index) => AllProductCard(
-                              productImage: product[index].image,
-                              title: product[index].title,
-                              price: product[index].price,
+                            itemBuilder: (context, index) => InkWell(
+                              onTap: () {
+                                controller.productId.value = controller.allProductList[index].id!;
+                                controller.getSingleProduct();
+                                Get.to(() => DetailsScreen());
+                              },
+                              child: AllProductCard(
+                                productImage: product[index].image,
+                                title: product[index].title,
+                                price: product[index].price,
+                              ),
                             ),
                           ),
                         ),
@@ -106,7 +114,7 @@ class LandingPage extends StatelessWidget {
                 const Text('Popular Categories', style: CustomTheme.headline),
                 const SizedBox(height: 20),
                 Obx(
-                  () => controller.isLoading.value
+                  () => controller.isProductLoading.value
                       ? SizedBox(
                       height: MediaQuery.of(context).size.height / 2,
                       child: const Center(child: CircularProgressIndicator()))
@@ -119,7 +127,6 @@ class LandingPage extends StatelessWidget {
                             itemBuilder: (context, index) => InkWell(
                               onTap: () {
                                 catController.categoryName.value = catController.categoriesList[index];
-                                print('Name: ${catController.categoryName.value}');
                                 catController.getCategoryWiseProductList();
                                 Get.to(() => const CategoryMainScreen());
                               },

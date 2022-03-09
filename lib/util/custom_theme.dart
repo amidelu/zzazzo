@@ -41,7 +41,6 @@ class CustomTheme {
 
   static const TextStyle headline = TextStyle(
     fontWeight: FontWeight.bold,
-    overflow: TextOverflow.ellipsis,
     fontSize: 22,
     letterSpacing: 0.27,
   );
@@ -92,7 +91,7 @@ const appBarBackgroundColor = Color(0xff000513);
 const backgroundColor = Color(0xfff5f5f8);
 
 const linkColor = Color(0xff002060);
-const buttonColor = Color(0xff00bdd1);
+const sizeColor = Color(0xff00bdd1);
 const confirmButtonColor = Color(0xff119532);
 const cardHighlightColor = Color(0xff97d5a7);
 
